@@ -1,0 +1,6 @@
+Set of small projects for learning/evaluating GNU environments for ARM Cortex-M4. The board used is a STM32F4-Discovery from ST Microelectronics which features a STM32F407VG microcontroller.
+
+This projecs uses:
+- CodeSoucery
+- ST Link 2
+ 
