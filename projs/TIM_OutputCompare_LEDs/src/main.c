@@ -36,12 +36,11 @@
 /* Private variables ---------------------------------------------------------*/
 TIM_TimeBaseInitTypeDef		TIM_TimeBaseStructure;
 TIM_OCInitTypeDef			TIM_OCInitStructure;
-//TIM_BDTRInitTypeDef			TIM_BDTRInitStructure;
 
-__IO uint16_t Channel1Pulse = 100;		//  10 HZ
-__IO uint16_t Channel2Pulse = 200;		//   5 HZ
-__IO uint16_t Channel3Pulse = 1000;		//   1 HZ
-__IO uint16_t Channel4Pulse = 5000;		// 0.1 HZ
+__IO uint16_t Channel1Pulse = 10;		//  10 * 100 us = 1 ms
+__IO uint16_t Channel2Pulse = 100;		//  10 ms
+__IO uint16_t Channel3Pulse = 1000;		// 100 ms
+__IO uint16_t Channel4Pulse = 10000;	//   1 s
 
 
 /* Private function prototypes -----------------------------------------------*/
@@ -67,10 +66,10 @@ int main(void)
   TIM_ConfigPins();
 
   /* Time Base configuration */
-  // Incremento de TIM4_CNT a cada 1 ms
-  TIM_TimeBaseStructure.TIM_Prescaler = (uint16_t) (SystemCoreClock / 1000);
+  // TIM4_CNT increments every 100 us
+  TIM_TimeBaseStructure.TIM_Prescaler = (uint16_t) ( (SystemCoreClock / 2) / 10000);
   TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
-  // Gera overflow a cada 10 s
+  // TIM4_CNT overflows every 1000 ms
   TIM_TimeBaseStructure.TIM_Period = 10000;
   TIM_TimeBaseStructure.TIM_ClockDivision = 0;
   TIM_TimeBaseStructure.TIM_RepetitionCounter = 0;
